@@ -1,34 +1,43 @@
-// creating constant http variable
-const http = require('http')
-// creating a constant name for port
-const PORT = 9000
-// creating a variable name for my server connection
-const my_connect = http.createServer((req, res)=>{
-    res.writehead(200,{"content-Type": "application/json"});
-    console.log("Ready to run server!");
-    console.log(req.headers.authorization)
+const http = require("http");
+const port = 4200;
 
-    let body = []
+const student = [{id: 1, Name: "samuel"},
+                 {id: 1, Name: "james"},
+                 {id: 1, Name: "chinasa"}
+                 
+]
+
+const connect = http.createServer((req, res)=>{
+    res.setHeader("content-Type", "application/json");
+    console.log("New Server ready to run");
+
+    
+    // res.setHeader("Content-Type", "application/json");
+    // console.log(req.headers.authorizationn);
+
+    let body = [];
     req
-    .on("data", (chunk)=>{
-       body.push(chunk); 
-    })
-    .on("end",()=>{
-    body = Buffer.concat(body);
-    console.log(body)
+    .on("data", (chunk) => {
+    body = Buffer.concat(body).toString();
     const { method, url } = req;
     let status = 404;
     response = {
-        success: false,
-        data: null,};
-    })
+    success: false,
+    data: null,
 
-    res.write("Hello Samuel's World");
-    res.end();
+    }
+
+    });
+
+
+
+
+
+res.end();
 });
 
 
 
-my_connect.listen(PORT, () => {
-    console.log(`Server up and Running in PORT: ${PORT}`);
-  });
+connect.listen(port, () => {
+    console.log(`Server up and Running`);
+});
